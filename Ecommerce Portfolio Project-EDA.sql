@@ -1,11 +1,17 @@
 -- Portfolio Project- Exploratory Data Analysis
 
+-- E-commerce Dataset
 -- https://www.kaggle.com/datasets/steve1215rogg/e-commerce-dataset/data
 
 -- In this Portfolio Project:
 -- 1. Cleaning the dataset before data analysis.
 -- 2. Exploratory Data Analysis.
 		-- In this dataset we are going to explore the data and find trends or patterns.
+		-- 1. What is the total revenue?
+		-- 2. What is the best-selling category?
+		-- 3. Which payment method is most used?
+		-- And more.
+
         
 -- View dataset
 
@@ -264,3 +270,16 @@ ORDER BY Month, Total_Revenue DESC;
 
 -- Understanding how discounts perform across different months can help optimize promotions.
 -- This shows how discounts impact transactions and revenue throughout the year.
+
+-- Creating View to store data for later vizualization
+
+CREATE VIEW category_revenue_transaction AS
+SELECT Category, ROUND(SUM(Final_Price),2) AS Total_Revenue,COUNT(*) AS Total_Transaction
+FROM ecommerce_staging
+GROUP BY Category
+ORDER BY Total_Revenue DESC; 
+
+-- Let's query our view
+
+SELECT *
+FROM category_revenue_transaction;
