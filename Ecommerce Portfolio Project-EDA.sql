@@ -283,3 +283,4 @@ ORDER BY Total_Revenue DESC;
 
 SELECT *
 FROM category_revenue_transaction;
+
