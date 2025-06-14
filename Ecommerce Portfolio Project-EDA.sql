@@ -5,13 +5,7 @@
 
 -- In this Portfolio Project:
 -- 1. Cleaning the dataset before data analysis.
--- 2. Exploratory Data Analysis.
-		-- In this dataset we are going to explore the data and find trends or patterns.
-		-- 1. What is the total revenue?
-		-- 2. What is the best-selling category?
-		-- 3. Which payment method is most used?
-		-- And more.
-
+-- 2. Exploratory Data Analysis. (In this dataset we are going to explore the data and find trends or patterns.)
         
 -- View dataset
 
@@ -284,3 +278,5 @@ ORDER BY Total_Revenue DESC;
 SELECT *
 FROM category_revenue_transaction;
 
+-- Conclusion: Based on the data, increasing discounts does not lead to higher sales. Instead of relying on discounting, the business may benefit from optimizing other factors such as customer engagement, product positioning, or targeted marketing strategies. 
+	
