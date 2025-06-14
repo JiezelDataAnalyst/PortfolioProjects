@@ -5,8 +5,8 @@
 
 -- In this Portfolio Project:
 -- 1. Cleaning the dataset before data analysis.
--- 2. Exploratory Data Analysis. (In this dataset we are going to explore the data and find trends or patterns.)
-        
+-- 2. Exploratory Data Analysis. (In this dataset we are going to explore the data and find trends or patterns such as pricing trends, category performance over time, and payment method distribution.)
+
 -- View dataset
 
 SELECT * FROM ecommerce;     
