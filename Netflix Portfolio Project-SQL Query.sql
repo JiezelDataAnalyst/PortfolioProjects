@@ -37,7 +37,7 @@ SELECT * FROM [dbo].[netflix_titles]
 SELECT * FROM [dbo].[netflix_titles_staging]
 
 
---In conducting data cleaning, we usually follow some steps
+--In conducting data cleaning, I usually follow some steps
 
 --1.Removing Duplicates
 --2.Treating Nulls
@@ -51,8 +51,8 @@ SELECT * FROM [dbo].[netflix_titles_staging]
 SELECT *
 FROM (
 SELECT *, ROW_NUMBER() OVER(
-						PARTITION BY show_id,type,title,director,cast,country,date_added,duration,listed_in,description 
-						ORDER BY show_id) rownum
+			PARTITION BY show_id,type,title,director,cast,country,date_added,duration,listed_in,description 
+			ORDER BY show_id) rownum
 FROM [dbo].[netflix_titles_staging]
 	) AS  duplicates
 
@@ -61,12 +61,11 @@ FROM [dbo].[netflix_titles_staging]
 SELECT *
 FROM (
 SELECT *, ROW_NUMBER() OVER(
-						PARTITION BY show_id,type,title,director,cast,country,date_added,duration,listed_in,description 
-						ORDER BY show_id) rownum
+			PARTITION BY show_id,type,title,director,cast,country,date_added,duration,listed_in,description 
+			ORDER BY show_id) rownum
 FROM [dbo].[netflix_titles_staging]
-	) AS  duplicates
+) AS  duplicates
 WHERE rownum>1
-
 --No duplicates found
 
 --2.Checking nulls across columns
@@ -86,7 +85,7 @@ SELECT
 FROM [dbo].[netflix_titles_staging]
 
 --The director field has 2634 nulls. The nulls are pretty much large so it is not a good idea to delete them. 
---Instead, we will populate the column with nulls by using another column which has relationship to the director column.
+--Instead,I will populate the column with nulls by using another column which has relationship to the director column.
 
 SELECT a.cast,a.director,b.cast,b.director
 FROM [dbo].[netflix_titles_staging] a
@@ -95,7 +94,7 @@ JOIN [dbo].[netflix_titles_staging] b
 	AND a.show_id<>b.show_id
 --WHERE a.director IS NULL
 
---By using join, we discovered the same cast is likely to work with the same director.
+--By using join, I discovered the same cast is likely to work with the same director.
 --Using ISNULL to replace the null with specified default value
 
 SELECT a.cast,a.director,b.cast,b.director, ISNULL(a.director,b.director)
@@ -114,8 +113,8 @@ JOIN [dbo].[netflix_titles_staging] b
 	AND a.show_id<>b.show_id
 WHERE a.director IS NULL
 
---We populated 131 rows
---Checking if we populate all the director column...
+--Populated 131 rows
+--Checking if I can populate all the director column.
 
 SELECT a.cast,a.director,b.cast,b.director
 FROM [dbo].[netflix_titles_staging] a
@@ -123,11 +122,10 @@ JOIN [dbo].[netflix_titles_staging] b
 	ON a.cast=b.cast
 	AND a.show_id<>b.show_id
 
-SELECT 
-	SUM(CASE WHEN director IS NULL THEN 1 ELSE 0 END) AS nullcount_director
+SELECT SUM(CASE WHEN director IS NULL THEN 1 ELSE 0 END) AS nullcount_director
 FROM [dbo].[netflix_titles_staging]
 
---Although we succesfully populated the null values,there are still 2594 nulls in the director column.
+--Although I succesfully populated the null values, there are still 2594 nulls in the director column.
 --Let's populate null values in director column with "Unknown Director". 
 
 UPDATE [dbo].[netflix_titles_staging]
@@ -152,7 +150,7 @@ JOIN [dbo].[netflix_titles_staging] b
 	AND a.show_id<>b.show_id
 WHERE a.country IS NULL
 
---Checking if we successfully populate the nulls in country column
+--Checking if I successfully populate the nulls in country column
 
 SELECT a.director,a.country,b.director,b.country
 FROM [dbo].[netflix_titles_staging] a
@@ -160,8 +158,7 @@ JOIN [dbo].[netflix_titles_staging] b
 	ON a.director=b.director
 	AND a.show_id=b.show_id
 
-SELECT 
-	SUM(CASE WHEN country IS NULL THEN 1 ELse 0 END) AS nullcount_country
+SELECT SUM(CASE WHEN country IS NULL THEN 1 ELse 0 END) AS nullcount_country
 FROM [dbo].[netflix_titles_staging]
 
 -- Populating null values in country column with "Unknown Country". 
@@ -174,7 +171,7 @@ WHERE country IS NULL
 
 SELECT * FROM [dbo].[netflix_titles_staging]
 
---let's take a look at this
+--Let's take a look at this
 
 SELECT title,director
 FROM [dbo].[netflix_titles_staging]
@@ -186,7 +183,7 @@ Update [dbo].[netflix_titles_staging]
 SET title= 'Fullmetal Alchemist'
 WHERE title= 'FullMetal Alchemist'
 
---The director is null before but we update it with "Unknown Director" 
+--The director is null before but I updated it with "Unknown Director" 
 --Let's confirm if the director of Fullmetal Alchemist (for both rows) is Fumihiko Sori.
 
 SELECT title,director,country, release_year
@@ -194,7 +191,7 @@ FROM [dbo].[netflix_titles_staging]
 WHERE title LIKE 'Full%'
 
 --I added country and release year to confirm that the other one is not a duplicate.
---Since the release years are significantly different, we can't confidently say that the director is the same for both. Therefore, let's leave the director as "Unkonwn Director". 
+--Since the release years are significantly different, I can't confidently say that the director is the same for both. Therefore, I will leave the director as "Unkonwn Director". 
 
 --Let's look at this
 
@@ -213,7 +210,7 @@ FROM [dbo].[netflix_titles_staging]
 --WHERE rating LIKE '%min%'
 
 --While looking at rating column, I noticed that there are duration values in the column(Which is obviously not a rating).
---Let's find out if the duration column have some nulls so we can populate it if the rows are matched.
+--Let's find out if the duration column have some nulls so I can populate it if the rows are matched.
 
 SELECT rating,duration
 FROM [dbo].[netflix_titles_staging]
@@ -225,7 +222,7 @@ SELECT
 SUM(CASE WHEN duration IS NULL THEN 1 ELSE 0 END) AS nullcount_duration
 FROM [dbo].[netflix_titles_staging]
 
---Now, we verified and have 3 rows with duration data in rating column and 3 null values in duration column.
+--Now, I verified and have 3 rows with duration data in rating column and 3 null values in duration column.
 --Let's now move the data from rating to duration.
 
 UPDATE [dbo].[netflix_titles_staging]
@@ -248,7 +245,7 @@ UPDATE [dbo].[netflix_titles_staging]
 SET rating= 'Not Given'
 WHERE rating LIKE '%min%'
 
---Checking if we successfully update the column
+--Checking if I successfully update the column
 
 SELECT DISTINCT(rating)
 FROM [dbo].[netflix_titles_staging]
@@ -265,8 +262,8 @@ FROM [dbo].[netflix_titles_staging]
 
 --Breaking out country into individual column.
 --Separating Individual parts in country
---We can use PARSENAME to easily extract the parts
---PARSENAME only works with period, we need to replace first the comma with period
+--I can use PARSENAME to easily extract the parts
+--PARSENAME only works with period, I need to replace first the comma with period
 
 SELECT country,
 PARSENAME (REPLACE(country,',','.'),4) AS country1,
@@ -285,8 +282,8 @@ PARSENAME (REPLACE(country,',','.'),2) AS country2,
 PARSENAME (REPLACE(country,',','.'),1) AS country1
 FROM [dbo].[netflix_titles_staging]
 
---If we will use this in visualization, it is appropriate to use only one country. 
---To easily extract the first country we will use substring instead of using PARSENAME.
+--If I will use this in visualization, it is appropriate to use only one country. 
+--To easily extract the first country I will use substring instead of using PARSENAME.
 
 SELECT country, 
        CASE 
@@ -321,9 +318,9 @@ SELECT * FROM [dbo].[netflix_titles_staging]
 ALTER TABLE [dbo].[netflix_titles_staging]
 DROP COLUMN cast,description,country
 
---Let's look at our dataset
+--Let's look at the dataset
 
 SELECT * FROM [dbo].[netflix_titles_staging]
 
---Our dataset is now cleaned. 
---This dataset can be use for data exploration and vizualization.
+--The dataset is now clean. 
+--This dataset can now be use for data exploration and vizualization.
