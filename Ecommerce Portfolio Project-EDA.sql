@@ -133,24 +133,24 @@ SELECT * FROM ecommerce_staging;
 -- Sales Analysis
 
 -- Total Revenue
--- Let's find out how much e-commerce generated in sales in 2024.
+-- How much e-commerce generated in sales in 2024?
 
 SELECT ROUND(SUM(Final_Price),2) AS Total_Revenue
 FROM ecommerce_staging;
 
--- Total Transaction
+-- How many transactions were made for the whole year?
 
 SELECT COUNT(*) AS transaction_count
 FROM ecommerce_staging;
 
--- Let's find out how many transaction was made per user
+-- How many transactions were made per customer?
  
 SELECT User_ID, COUNT(*) As transaction_count
 FROM ecommerce_staging
 GROUP BY User_ID;
 
 -- Average Transaction Value(ATV)
--- Let' find out what is the average spending per unique user
+-- What is the average spending per unique user?
 
 SELECT ROUND(SUM(Final_Price)/COUNT(DISTINCT(User_ID)),2) AS ATV
 FROM ecommerce_staging;
@@ -159,9 +159,7 @@ FROM ecommerce_staging;
 
 -- Monthly Sales Trend
 
-SELECT * FROM ecommerce_staging;
-
--- Let's find out which month is the most profitable and which month is the least profitable
+-- Which month is the most profitable and which month is the least profitable?
 
 SELECT DATE_FORMAT(Purchase_Date,'%M') AS Month,ROUND(SUM(Final_Price),2) AS Monthly_Sales
 FROM ecommerce_staging
@@ -169,7 +167,7 @@ GROUP BY Month
 ORDER BY Monthly_Sales DESC;
 -- By sorting the data by Total_Revenue, we can see that the month of October had the highest sales, whereas the November had the least sales.
 
--- Let's see which category performs best each month
+-- Which category performs best each month?
 
 SELECT DATE_FORMAT(Purchase_Date,'%M') AS Month, 
     Category, 
@@ -180,13 +178,15 @@ ORDER BY Month, Monthly_Sales DESC;
 
 -- Weekly Sales Trend
 
+-- Which week has the highest sales and which week generates least sales?
+
 SELECT WEEK(Purchase_Date,7) AS ISO_Weeknumber,ROUND(SUM(Final_Price),2) AS Weekly_Sales
 FROM ecommerce_staging
 GROUP BY ISO_Weeknumber
 ORDER BY Weekly_Sales DESC;
 -- By sorting by Total_Revenue, we can see that Week 16 had the highest sales and week 47 had the least sales.
 
--- If we want to know the average sales per week
+-- What is the average sales per week?
 
 SELECT 
     WEEK(Purchase_Date,7) AS ISO_Weeknumber,
@@ -196,7 +196,7 @@ FROM ecommerce_staging
 GROUP BY ISO_Weeknumber
 ORDER BY ISO_Weeknumber;
 
--- Let's see which category performs best each week
+-- Which category performs best each week?
 
 SELECT WEEK(Purchase_Date,7) AS ISO_Weeknumber,Category,ROUND(SUM(Final_Price),2) AS Weekly_Sales
 FROM ecommerce_staging
@@ -204,7 +204,7 @@ GROUP BY ISO_Weeknumber,Category
 ORDER BY ISO_Weeknumber,Weekly_Sales DESC;
 
 -- Category by Sales and Transaction
--- Let's find out how many transaction was made per category and which category generates the highest sales
+-- How many transactions were made per category and which category generates the highest sales?
 
 SELECT Category, ROUND(SUM(Final_Price),2) AS Total_Revenue,COUNT(*) AS Total_Transaction
 FROM ecommerce_staging
@@ -215,7 +215,7 @@ ORDER BY Total_Revenue DESC;
 -- Payment method Analysis
 
 -- Payment method by revenue and transaction
--- If we want to analyze the most frequent payment method used, we can sort it by total transaction
+-- What is the most used payment method?
 
 SELECT Payment_Method, ROUND(SUM(Final_Price),2) AS Total_Revenue, COUNT(*) AS Total_Transaction
 FROM ecommerce_staging
@@ -227,6 +227,7 @@ ORDER BY Total_Revenue DESC;
 -- Also, credit card have the most number transaction and the cash on delivery has the lowest
 
 -- Discount vs Sales
+-- Which discount generates the highest sales?
 
 SELECT Discount, ROUND(SUM(Final_Price),2) AS Total_Revenue
 FROM ecommerce_staging
@@ -236,7 +237,7 @@ ORDER BY Total_Revenue DESC;
 
 -- Category-Level Trends
 -- Let's find out the category that generate highest sales by applying discount to price
--- Analyzing how discounts impact different product categories could help refine promotional strategies.
+-- How discounts impact different product categories?
 
 SELECT Category,Discount,ROUND(SUM(Final_Price),2) AS Total_Revenue, COUNT(*) AS Total_Transaction
 FROM ecommerce_staging
@@ -244,7 +245,7 @@ GROUP BY Price,Discount,Category
 ORDER BY Total_Revenue DESC;
 -- With a discount of 30% the electronics category had the highest sales and by applying 50% discount the books category had the least sales.
 
--- Let's find out how many transactions was made in each discounted price
+-- How many transactions was made in each discounted price?
 
 SELECT Discount, COUNT(*) AS Total_Transaction
 FROM ecommerce_staging
