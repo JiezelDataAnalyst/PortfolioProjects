@@ -1,4 +1,4 @@
-This repository contains my work on Exploratory Data Analysis (EDA) and Data Cleaning, focusing on real-world business use cases. Each project highlights how I approach data challenges from start to finish—using a range of SQL techniques to clean, transform, and extract insights.
+This repository contains my work on Exploratory Data Analysis (EDA) and Data Cleaning, focusing on real-world business datasets. Each project highlights how I approach data challenges from start to finish—using a range of SQL techniques to clean, transform, and extract insights.
 
 Techniques Used:
 
