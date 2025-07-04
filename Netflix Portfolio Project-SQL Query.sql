@@ -205,7 +205,7 @@ WHERE title= 'DEATH NOTE'
 
 --Let's look at the other columns
 
-SELECT DISTINCT(rating)
+SELECT DISTINCT(rating), duration
 FROM [dbo].[netflix_titles_staging]
 --WHERE rating LIKE '%min%'
 
