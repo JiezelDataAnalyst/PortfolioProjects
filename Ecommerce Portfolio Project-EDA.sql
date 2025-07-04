@@ -241,7 +241,7 @@ ORDER BY Total_Revenue DESC;
 
 SELECT Category,Discount,ROUND(SUM(Final_Price),2) AS Total_Revenue, COUNT(*) AS Total_Transaction
 FROM ecommerce_staging
-GROUP BY Price,Discount,Category 
+GROUP BY Category, Discount
 ORDER BY Total_Revenue DESC;
 -- With a discount of 30% the electronics category had the highest sales and by applying 50% discount the books category had the least sales.
 
