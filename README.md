@@ -1,6 +1,6 @@
-## This repository contains my projects which highlights how I approach data challenges from start to finish—using a range of SQL techniques to clean, transform, and extract insights.
+### This repository contains my projects which highlights how I approach data challenges from start to finish—using a range of SQL techniques to clean, transform, and extract insights.
 
-### Techniques Used:
+**Techniques Used:**
 
 - Standardizing Data by applying CASE logic, data type conversions, and renaming conventions
 - Exploratory Data Analysis (EDA) through KPIs such as total revenue, quantity sold, transactions, and average order value (AOV)
