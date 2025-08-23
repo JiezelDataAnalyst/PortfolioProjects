@@ -120,3 +120,4 @@ FROM rfm_calc;
 -- Quick Bite Convenience Stores falls at at-risk customers, this indicate that we need to focus on retention campaigns.
 
 -- YT Restaurants is classified as potential churners, focus on offering time-sensitive promotions or exclusive previews to reignite interest.
+
