@@ -1,4 +1,4 @@
-### This repository contains my projects which highlights how I approach data challenges from start to finish—using a range of SQL techniques to clean, transform, and extract insights.
+*### This repository contains my projects which highlights how I approach data challenges from start to finish—using a range of SQL techniques to clean, transform, and extract insights.*
 
 **Techniques Used:**
 
