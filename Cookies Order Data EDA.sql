@@ -1,6 +1,6 @@
 -- Exploratory Data Analysis in Cookies Order Data
 
--- In this dataset, I will perform analysis to uncover sales metrics and trends.
+-- In this dataset, I performed analysis to uncover sales metrics and trends.
 
 -- View dataset
 SELECT * FROM cookies_order_data;
@@ -54,16 +54,16 @@ GROUP BY customer_name
 ORDER BY total_revenue DESC;
 -- Cascade Grovers customer contribute the most to sales.
 
--- What’s the average number of orders per customer?
+-- Whatâ€™s the average number of orders per customer?
 SELECT ROUND(COUNT(Order_ID) * 1.0 / COUNT(DISTINCT Customer_Name), 2) AS avg_orders_per_customer
 FROM cookies_order_data;
 -- The average order made by each customer is 496.6.
 
--- What’s the average time between order and shipment by customer?
+-- Whatâ€™s the average time between order and shipment by customer?
 SELECT Customer_Name, AVG(Days_to_Ship) AS avg_days
 FROM cookies_order_data
 GROUP BY Customer_Name;
--- The average days to ship for YT Restaurants is 5 days, which may be acceptable depending on industry standards—but it also signals an opportunity to improve fulfillment speed and customer satisfaction.
+-- The average days to ship for YT Restaurants is 5 days, which may be acceptable depending on industry standardsâ€”but it also signals an opportunity to improve fulfillment speed and customer satisfaction.
 
 -- How many customers placed only one order (potential churn)?
 SELECT Customer_Name
@@ -118,4 +118,5 @@ SELECT
    END AS rfm_segment
 FROM rfm_calc;
 -- Quick Bite Convenience Stores falls at at-risk customers, this indicate that we need to focus on retention campaigns.
+
 -- YT Restaurants is classified as potential churners, focus on offering time-sensitive promotions or exclusive previews to reignite interest.
